@@ -9,14 +9,13 @@
 	<artifactId>camel3-xmldsl-sample-project</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0.0-SNAPSHOT</version>
-
 	<name>camel3-xmldsl-sample-project</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<spring.boot-version>2.7.1</spring.boot-version>
-		<surefire.plugin.version>3.0.0-M4</surefire.plugin.version>
+		<spring.boot.version>2.7.1</spring.boot.version>
+		<camel.version>3.14.2</camel.version>
+		<maven.compiler.release>11</maven.compiler.release>
 	</properties>
 
 	<dependencyManagement>
@@ -25,7 +24,7 @@
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
-				<version>${spring.boot-version}</version>
+				<version>${spring.boot.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -33,17 +32,15 @@
 			<dependency>
 				<groupId>org.apache.camel.springboot</groupId>
 				<artifactId>camel-spring-boot-bom</artifactId>
-				<version>3.14.2.redhat-00054</version>
+				<version>${camel.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-
 		</dependencies>
 	</dependencyManagement>
 
 	<dependencies>
-
-		<!-- Spring Boot -->
+		<!-- Spring Boot Web -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -62,7 +59,8 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-		<!-- Camel Servlet Starter (for Spring Boot XML routes) -->
+
+		<!-- Camel Servlet Starter (Spring Boot XML + Servlet support) -->
 		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
 			<artifactId>camel-servlet-starter</artifactId>
@@ -74,23 +72,13 @@
 			<artifactId>camel-spring-boot-xml-starter</artifactId>
 		</dependency>
 
-
-		<!-- Camel -->
-
-
-		<!-- Camel -->
+		<!-- Camel Swagger / OpenAPI support -->
 		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
-			<artifactId>camel-spring-boot-xml-starter</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel.springboot</groupId>
-			<artifactId>camel-servlet-starter</artifactId>
+			<artifactId>camel-swagger-java-starter</artifactId>
 		</dependency>
 
-
-
-		<!-- Test -->
+		<!-- Testing -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -101,33 +89,25 @@
 			<artifactId>camel-test-spring-junit5</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-		<!-- Swagger UI -->
-		<dependency>
-			<groupId>org.apache.camel.springboot</groupId>
-			<artifactId>camel-swagger-java-starter</artifactId>
-		</dependency>
-		<!-- include springodc so we can browse the api docs in a swagger web ui -->
-		<dependency>
-			<groupId>org.apache.camel.springboot</groupId>
-			<artifactId>camel-springdoc-starter</artifactId>
-		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
+			<!-- Compiler plugin -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.10.1</version>
 				<configuration>
-					<release>11</release>
+					<release>${maven.compiler.release}</release>
 				</configuration>
 			</plugin>
+
+			<!-- Spring Boot Maven plugin -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>${spring.boot-version}</version>
+				<version>${spring.boot.version}</version>
 				<executions>
 					<execution>
 						<goals>
@@ -136,12 +116,13 @@
 					</execution>
 				</executions>
 			</plugin>
+
+			<!-- Surefire for tests -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>${surefire.plugin.version}</version>
+				<version>3.0.0-M4</version>
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
