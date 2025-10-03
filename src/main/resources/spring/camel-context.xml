@@ -19,6 +19,7 @@
 
         <route id="_route1">
             <from id="_from1" uri="direct:hello"/>
+            <log message="Hit Received {{incomingOrders}}"/>
             <transform id="_transform1">
                 <simple>{{incomingOrders}}</simple>
             </transform>
@@ -29,6 +30,7 @@
 
         <route id="_route2">
             <from id="_from1" uri="direct:helloworld"/>
+            <log message="Hit Received {{outgoingOrders}}"/>
             <transform id="_transform2">
                 <simple>{{outgoingOrders}}</simple>
             </transform>
