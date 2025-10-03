@@ -32,7 +32,7 @@
             <transform id="_transform2">
                 <simple>{{outgoingOrders}}</simple>
             </transform>
-            <to id="route-to-incoming-orders" uri="amqp:outgoingOrders"/>
+            <to id="route-to-incoming-orders1" uri="amqp:outgoingOrders"/>
             <log message="Hello {{outgoingOrders}}"/>
         </route>
 
