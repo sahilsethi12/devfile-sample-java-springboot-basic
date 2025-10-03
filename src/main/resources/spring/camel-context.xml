@@ -26,6 +26,12 @@
 
             <to id="route-to-incoming-orders" uri="amqp:incomingOrders"/>
             <log message="Hello {{incomingOrders}}"/>
+            <setHeader name="Content-Type">
+                <simple>application/json</simple>
+            </setHeader>
+            <setBody>
+                <simple>{"message":"Successfully  Received"</simple>
+            </setBody>
         </route>
 
         <route id="_route2">
@@ -36,6 +42,12 @@
             </transform>
             <to id="route-to-incoming-orders1" uri="amqp:outgoingOrders"/>
             <log message="Hello {{outgoingOrders}}"/>
+            <setHeader name="Content-Type">
+                <simple>application/json</simple>
+            </setHeader>
+            <setBody>
+                <simple>{"message":"Successfully  Received"</simple>
+            </setBody>
         </route>
 
     </camelContext>
@@ -49,23 +61,6 @@
     </bean>
 
 
-     <!-- <bean class="org.apache.qpid.jms.JmsConnectionFactory" id="jmsConnectionFactory">
-         <property name="username" value="${amqp.username}"/>
-         <property name="password" value="${amqp.password}"/>
-         <property name="remoteURI" value="${amqp.url}"/>
-     </bean>
-      <bean class="org.apache.camel.component.sjms2.Sjms2Component" id="amqp">
-         <property name="connectionFactory" ref="jmsConnectionFactory"/>
-     </bean>
-
-    <bean id="amqp" class="org.apache.camel.component.amqp.AmqpComponent">
-        <property name="connectionFactory">
-            <bean class="org.apache.qpid.jms.JmsConnectionFactory" factory-method="createFromURL">
-                <property name="remoteURI" value="amqp://localhost:5672" />
-                <property name="topicPrefix" value="topic://" />
-            </bean>
-        </property>
-    </bean>-->
 
 
     <!-- Qpid JMS ConnectionFactory -->
