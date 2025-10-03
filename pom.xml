@@ -59,6 +59,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-amqp-starter</artifactId>
+			<!-- use the same version as your Camel core version -->
+		</dependency>
 
 		<!-- Camel Servlet Starter (Spring Boot XML + Servlet support) -->
 		<dependency>
