@@ -6,22 +6,22 @@
 
         <restConfiguration component="servlet" contextPath="/api"/>
         <rest id="rest" path="/say">
-            <get consumes="application/json" id="get" produces="text" uri="/incoming_order">
+            <post consumes="application/json" id="get" produces="text" uri="/incoming_order">
                 <to uri="direct:hello"/>
-            </get>
+            </post>
 
-            <get consumes="application/json" id="get" produces="text" uri="/outgoing_order">
+            <post consumes="application/json" id="get" produces="text" uri="/outgoing_order">
                 <to uri="direct:helloworld"/>
-            </get>
+            </post>
         </rest>
 
 
 
         <route id="_route1">
             <from id="_from1" uri="direct:hello"/>
-            <log message="Hit Received {{incomingOrders}}"/>
+            <log message="Hit Received {{incomingOrders}} with ${body}"/>
             <transform id="_transform1">
-                <simple>{{incomingOrders}}</simple>
+                <simple>${body}</simple>
             </transform>
 
             <to id="route-to-incoming-orders" uri="amqp:incomingOrders"/>
@@ -30,15 +30,15 @@
                 <simple>application/json</simple>
             </setHeader>
             <setBody>
-                <simple>{"message":"Successfully  Received"</simple>
+                <simple>{"message":"Successfully  Received"}</simple>
             </setBody>
         </route>
 
         <route id="_route2">
             <from id="_from1" uri="direct:helloworld"/>
-            <log message="Hit Received {{outgoingOrders}}"/>
+            <log message="Hit Received {{outgoingOrders}}  with ${body}"/>
             <transform id="_transform2">
-                <simple>{{outgoingOrders}}</simple>
+                <simple>${body}</simple>
             </transform>
             <to id="route-to-incoming-orders1" uri="amqp:outgoingOrders"/>
             <log message="Hello {{outgoingOrders}}"/>
@@ -46,7 +46,7 @@
                 <simple>application/json</simple>
             </setHeader>
             <setBody>
-                <simple>{"message":"Successfully  Received"</simple>
+                <simple>{"message":"Successfully  Received"}</simple>
             </setBody>
         </route>
 
