@@ -24,7 +24,7 @@
                 <simple>${body}</simple>
             </transform>
 
-            <to id="route-to-incoming-orders" uri="amqp:incomingOrders?exchangePattern=InOnly"/>
+            <to id="route-to-incoming-orders" uri="amqps:incomingOrders?exchangePattern=InOnly"/>
             <log message="Hello {{incomingOrders}}"/>
             <setHeader name="Content-Type">
                 <simple>application/json</simple>
@@ -40,7 +40,7 @@
             <transform id="_transform2">
                 <simple>${body}</simple>
             </transform>
-            <to id="route-to-incoming-orders1" uri="amqp:outgoingOrders?exchangePattern=InOnly"/>
+            <to id="route-to-incoming-orders1" uri="amqps:outgoingOrders?exchangePattern=InOnly"/>
             <log message="Hello {{outgoingOrders}}"/>
             <setHeader name="Content-Type">
                 <simple>application/json</simple>
@@ -72,7 +72,7 @@
     </bean>
 
     <!-- Bind AMQP component to Camel -->
-    <bean id="amqp" class="org.apache.camel.component.amqp.AMQPComponent">
+    <bean id="amqps" class="org.apache.camel.component.amqp.AMQPComponent">
         <property name="connectionFactory" ref="jmsConnectionFactory"/>
     </bean>
 
