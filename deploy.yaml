@@ -30,9 +30,9 @@ metadata:
   name: my-java-springboot-svc
 spec:
   ports:
-    - name: http-8988
-      port: 8988
+    - name: http-8081
+      port: 8081
       protocol: TCP
-      targetPort: 8988
+      targetPort: 8081
   selector:
     app: java-springboot-app
