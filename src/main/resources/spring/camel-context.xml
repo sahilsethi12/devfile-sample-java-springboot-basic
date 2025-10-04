@@ -30,7 +30,7 @@
                 <simple>application/json</simple>
             </setHeader>
             <setBody>
-                <simple>{"message":"Successfully  Received"}</simple>
+                <simple>{"message":"Successfully Received", "date":"${date:now:yyyy-MM-dd HH:mm:ss}"}</simple>
             </setBody>
         </route>
 
@@ -46,7 +46,7 @@
                 <simple>application/json</simple>
             </setHeader>
             <setBody>
-                <simple>{"message":"Successfully  Received"}</simple>
+                <simple>{"message":"Successfully Received", "date":"${date:now:yyyy-MM-dd HH:mm:ss}"}</simple>
             </setBody>
         </route>
 

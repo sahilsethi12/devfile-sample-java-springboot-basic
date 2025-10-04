@@ -13,6 +13,9 @@ public class DemoApplication {
 
     // must have a main method spring-boot can run
     public static void main(String[] args) {
+        // Example: setting JVM properties for SSL or AMQ connections
+       // System.setProperty("javax.net.ssl.trustStore", "/Users/sasethi/Downloads/devfile-sample-java-springboot-basic/clientca.ts");
+       // System.setProperty("javax.net.ssl.trustStorePassword", "redhat");
         SpringApplication.run(DemoApplication.class, args);
     }
 
