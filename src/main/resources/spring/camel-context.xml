@@ -10,38 +10,16 @@
                 <to uri="direct:hello"/>
             </post>
 
-            <post consumes="application/json" id="get" produces="text" uri="/outgoing_order">
-                <to uri="direct:helloworld"/>
-            </post>
         </rest>
 
 
 
-        <route id="_route1">
+        <route id="_route1" streamCache="true">
             <from id="_from1" uri="direct:hello"/>
+            <convertBodyTo type="java.lang.String"/>
             <log message="Hit Received {{incomingOrders}} with ${body}"/>
-            <transform id="_transform1">
-                <simple>${body}</simple>
-            </transform>
-
             <to id="route-to-incoming-orders" uri="amqps:incomingOrders?exchangePattern=InOnly"/>
-            <log message="Hello {{incomingOrders}}"/>
-            <setHeader name="Content-Type">
-                <simple>application/json</simple>
-            </setHeader>
-            <setBody>
-                <simple>{"message":"Successfully Received", "date":"${date:now:yyyy-MM-dd HH:mm:ss}"}</simple>
-            </setBody>
-        </route>
-
-        <route id="_route2">
-            <from id="_from1" uri="direct:helloworld"/>
-            <log message="Hit Received {{outgoingOrders}}  with ${body}"/>
-            <transform id="_transform2">
-                <simple>${body}</simple>
-            </transform>
-            <to id="route-to-incoming-orders1" uri="amqps:outgoingOrders?exchangePattern=InOnly"/>
-            <log message="Hello {{outgoingOrders}}"/>
+            <log message="Successfully Sent in Queue {{incomingOrders}}"/>
             <setHeader name="Content-Type">
                 <simple>application/json</simple>
             </setHeader>

@@ -94,6 +94,14 @@
 			<artifactId>camel-test-spring-junit5</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-jackson-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-jsonpath-starter</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
